@@ -2,60 +2,95 @@ let lectures = [
     {
         "id" : 101,
         "image" :"images/math symbol.png",
-        "subject" : 'Laser Pointer',
+        "subject" : 'Math',
         "location": 'Sweden',
         "price" : 220,
-        "detail": 'this is a Laser pointer from Sweden',
-        "availableInventory": 8,
-        "rating": 2 
+        "availableInventory": 5, 
     },
 
     {
     
         "id" : 202,
         "image" :'images/math symbol.png',
-        "subject" : 'blue pointer',
+        "subject" : 'English',
         "location": 'Sweden',
         "price" : 220,
-        "detail": 'this is a blue pointer from Sweden',
-        "availableInventory": 8,
-        "rating": 3
+        "availableInventory": 5,
     },
 
     {
         
         "id" : 303,
         "image" :'images/math symbol.png',
-        "subject" : 'red pointer',
+        "subject" : 'French',
         "location": 'Sweden',
         "price" : 220,
-        "detail": 'this is a red pointer from Sweden',
-        "availableInventory": 8,
-        "rating": 4
+        "availableInventory": 5,
     },
 
     {
         
         "id" : '404',
         "image" :'images/math symbol.png',
-        "subject" : 'yellow pointer',
+        "subject" : 'German',
         "location": 'Sweden',
         "price" : 220,
-        "detail": 'this is a yellow pointer from Sweden',
-        "availableInventory": 8,
-        "rating": 2
+        "availableInventory": 5,
     },
 
     {
         
         "id" : 505,
         "image" :'images/math symbol.png',
-        "subject" : 'black pointer',
+        "subject" : 'cooking',
         "location": 'Sweden',
         "price" : 220,
-        "detail": 'this is a black pointer from Sweden',
-        "availableInventory": 8,
-        "rating": 5
+        "availableInventory": 5,
+    },
+    {
+        
+        "id" : 606,
+        "image" :'images/math symbol.png',
+        "subject" : 'Football',
+        "location": 'Sweden',
+        "price" : 220,
+        "availableInventory": 5,
+    },
+    {
+        
+        "id" : 707,
+        "image" :'images/math symbol.png',
+        "subject" : 'swimming',
+        "location": 'Sweden',
+        "price" : 220,
+        "availableInventory": 5,
+    },
+    {
+        
+        "id" : 808,
+        "image" :'images/math symbol.png',
+        "subject" : 'Microsoft Excel',
+        "location": 'Sweden',
+        "price" : 220,
+        "availableInventory": 5,
+    },
+    {
+        
+        "id" : 909,
+        "image" :'images/math symbol.png',
+        "subject" : 'art',
+        "location": 'Sweden',
+        "price" : 220,
+        "availableInventory": 5,
+    },
+    {
+        
+        "id" : 1010,
+        "image" :'images/math symbol.png',
+        "subject" : 'Tailoring',
+        "location": 'Sweden',
+        "price" : 220,
+        "availableInventory": 5,
     }
 
             

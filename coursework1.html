@@ -15,10 +15,11 @@
 <div id="app">
     <header>
         <h1 v-text="sitename"></h1>
-        <button v-on:click='showCheckout'>
+        <button v-on:click='showCheckout':disabled="cart.length === 0">
             {{cartItemCount}}
             <i class="fa-solid fa-cart-plus"></i> Checkout
         </button>
+        <button v-on:click="sortBy('subject')">Sort by Subject</button>
     </header>
    <main>
     <div v-if="showProduct">
@@ -28,12 +29,14 @@
         </figure>
         <h2 v-text="webstore.title"></h2>
         <p v-html="webstore.description"></p>
-        
+
+        <p>subject:{{webstore.subject}}</p>
+        <p>location:{{webstore.location}}</p>
         <p>Price: {{webstore.price}}</p>
         <p>Available Stock: {{webstore.availableInventory}}</p>
 
         <button v-on:click="addToCart(webstore)" :disabled="webstore.availableInventory < 1">Add to Cart</button>
-        <button v-on:click="subtractToCart(webstore)">Drop from Cart</button>
+        <button v-on:click="subtractToCart(webstore)" :disabled="cart.length === 0">Drop from Cart</button>
 
          
     </div>
@@ -49,56 +52,19 @@
         <input v-model.trim="order.lastname">
     </p>
     <p>
-        <strong>Address:</strong>
-        <input v-model="order.address">
+        <strong>Cellphone</strong>
+        <input v-model="order.cellphone">
     </p>
     <p>
-        <strong>City:</strong>
-        <input v-model="order.city">
-    </p>
-    <p>
-        <strong>State:</strong>
-        <select name="" v-model="order.state" id="">
-            <option disabled value="">State</option>
-            <option v-for="(state, key) in states"
-            v-bind:value="state">
-            {{key}}
-            </option>
-            <option value=""></option>
-            
-        </select>
         
-    </p>
-    <p>
-        <strong>Zip/Postal Code:</strong>
-        <input v-model.number="order.zip" type="number">
-    </p>
-    <p>
-        <input type="checkbox" value="true" id="gift" v-model="order.gift" 
-        v-bind:true-value="order.sendGift" 
-        v-bind:false-value="order.dontSendGift">
-        
-        <label for="gift">Ship as a Gift?</label>
-    </p>
-    <p>
-        <input type="radio" value="Home" id="home" v-model="order.method">
-        <label for="home">Home</label>
-    
-        <input type="radio" value="Business" id="buisness" v-model="order.method">
-        <label for="business">Business</label>
         
     </p>
     <button v-on:click="submitForm">Place Order</button>
     <h2>Order Information</h2>
     <p>First Name: {{order.firstname}}</p>
     <p>Last Name: {{order.lastname}}</p>
-    <p>Address: {{order.address}}</p>
-    <p>City: {{order.city}}</p>
-    <p>Zip: {{order.zip}}</p>
-    <p>State: {{order.state}}</p>
-    <p>Gift: {{order.gift}}</p>
-    <p>Method: {{order.method}}</p>
-   </div>
+    <p>Cellphone: {{order.cellphone}}</p>
+    </div>
     
    </main>
 </div>
@@ -115,14 +81,7 @@
             {
                 firstname: '',
                 lastname: '',
-                address:'',
-                city:'',
-                zip:'',
-                state:'',
-                gift: false,
-                method:'Home',
-                sendGift:'Send as a Gift',
-                dontSendGift:'Do not send as a gift'
+                cellphone:'',
             },
             states:
             {
@@ -141,7 +100,7 @@
             {
                 this.cart.push(lecture)
                 lecture.availableInventory -=1
-                console.log(this.cart)
+                
             },
             showCheckout()
             {
@@ -154,7 +113,7 @@
             subtractToCart()
             {
                 this.cart.push(lecture)
-                
+                lecture.availableInventory +=1
             }
 
         }, 

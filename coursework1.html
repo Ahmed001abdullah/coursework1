@@ -4,9 +4,169 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>booking lectures</title>
+    <script src="lectures.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
 </head>
 <body>
+<div id="app">
+    <header>
+        <h1 v-text="sitename"></h1>
+        <button v-on:click='showCheckout'>
+            {{cartItemCount}}
+            <i class="fa-solid fa-cart-plus"></i> Checkout
+        </button>
+    </header>
+   <main>
+    <div v-if="showProduct">
+        <div v-for="webstore in lectures">
+        <figure>
+            <img v-bind:src = "webstore.image" width="200">
+        </figure>
+        <h2 v-text="webstore.title"></h2>
+        <p v-html="webstore.description"></p>
+        
+        <p>Price: {{webstore.price}}</p>
+        <p>Available Stock: {{webstore.availableInventory}}</p>
+
+        <button v-on:click="addToCart(webstore)" :disabled="webstore.availableInventory < 1">Add to Cart</button>
+        <button v-on:click="subtractToCart(webstore)">Drop from Cart</button>
+
+         
+    </div>
+    </div>
+   <div v-else>
+    <h2>Checkout</h2>
+    <p>
+        <strong>First Name</strong>
+        <input v-model.trim="order.firstname">
+    </p>
+    <p>
+        <strong>Last Name</strong>
+        <input v-model.trim="order.lastname">
+    </p>
+    <p>
+        <strong>Address:</strong>
+        <input v-model="order.address">
+    </p>
+    <p>
+        <strong>City:</strong>
+        <input v-model="order.city">
+    </p>
+    <p>
+        <strong>State:</strong>
+        <select name="" v-model="order.state" id="">
+            <option disabled value="">State</option>
+            <option v-for="(state, key) in states"
+            v-bind:value="state">
+            {{key}}
+            </option>
+            <option value=""></option>
+            
+        </select>
+        
+    </p>
+    <p>
+        <strong>Zip/Postal Code:</strong>
+        <input v-model.number="order.zip" type="number">
+    </p>
+    <p>
+        <input type="checkbox" value="true" id="gift" v-model="order.gift" 
+        v-bind:true-value="order.sendGift" 
+        v-bind:false-value="order.dontSendGift">
+        
+        <label for="gift">Ship as a Gift?</label>
+    </p>
+    <p>
+        <input type="radio" value="Home" id="home" v-model="order.method">
+        <label for="home">Home</label>
     
+        <input type="radio" value="Business" id="buisness" v-model="order.method">
+        <label for="business">Business</label>
+        
+    </p>
+    <button v-on:click="submitForm">Place Order</button>
+    <h2>Order Information</h2>
+    <p>First Name: {{order.firstname}}</p>
+    <p>Last Name: {{order.lastname}}</p>
+    <p>Address: {{order.address}}</p>
+    <p>City: {{order.city}}</p>
+    <p>Zip: {{order.zip}}</p>
+    <p>State: {{order.state}}</p>
+    <p>Gift: {{order.gift}}</p>
+    <p>Method: {{order.method}}</p>
+   </div>
+    
+   </main>
+</div>
+ <script type="text/javascript">
+    var webstore = new Vue({
+
+       
+        el: '#app',
+        data:{ 
+            sitename: 'Book Lectures',
+            showProduct: true,
+          
+            order:
+            {
+                firstname: '',
+                lastname: '',
+                address:'',
+                city:'',
+                zip:'',
+                state:'',
+                gift: false,
+                method:'Home',
+                sendGift:'Send as a Gift',
+                dontSendGift:'Do not send as a gift'
+            },
+            states:
+            {
+                AL:'Alabama',
+                AR:'Arizona',
+                CA:'Califonia',
+                NV:'Neveda'
+            },
+
+            lectures:lectures,
+            cart: []  
+        },
+        methods:{
+            
+            addToCart(lecture)
+            {
+                this.cart.push(lecture)
+                lecture.availableInventory -=1
+                console.log(this.cart)
+            },
+            showCheckout()
+            {
+                this.showProduct = this.showProduct ? false : true;
+            },
+            submitForm()
+            {
+                alert('Order Submitted')
+            },
+            subtractToCart()
+            {
+                this.cart.push(lecture)
+                
+            }
+
+        }, 
+        computed:{ 
+            cartItemCount: function () {
+                return this.cart.length || '';
+            },
+            canAddToCart: function() 
+            {return this.lectures.availableInventory > this.cartItemCount;  }   
+        },
+        
+        })
+ </script>
 </body>
 </html>

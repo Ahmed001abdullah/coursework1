@@ -19,11 +19,11 @@
             {{cartItemCount}}
             <i class="fa-solid fa-cart-plus"></i> Checkout
         </button>
-        <button v-on:click="sortBy('subject')">Sort by Subject</button>
     </header>
    <main>
     <div v-if="showProduct">
         <div v-for="webstore in lectures">
+        
         <figure>
             <img v-bind:src = "webstore.image" width="200">
         </figure>
@@ -36,7 +36,7 @@
         <p>Available Stock: {{webstore.availableInventory}}</p>
 
         <button v-on:click="addToCart(webstore)" :disabled="webstore.availableInventory < 1">Add to Cart</button>
-        <button v-on:click="subtractToCart(webstore)" :disabled="cart.length === 0">Drop from Cart</button>
+        <button v-on:click="subtractToCart(webstore)">Drop from Cart</button>
 
          
     </div>
@@ -112,7 +112,7 @@
             },
             subtractToCart()
             {
-                this.cart.push(lecture)
+                this.cart.pull(lecture)
                 lecture.availableInventory +=1
             }
 
@@ -121,8 +121,11 @@
             cartItemCount: function () {
                 return this.cart.length || '';
             },
-            canAddToCart: function() 
-            {return this.lectures.availableInventory > this.cartItemCount;  }   
+            canAddToCart: function() {
+                return this.lectures.availableInventory > this.cartItemCount;  
+            }   
+            
+            
         },
         
         })
